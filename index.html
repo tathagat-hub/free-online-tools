@@ -3,94 +3,170 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Free Online Tools</title>
+<title>Free Online Tools Hub</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
+/* BACKGROUND ANIMATION */
+
 body{
 margin:0;
-font-family:Arial;
-background:#f4f6fb;
+font-family:Segoe UI,Arial;
+background:linear-gradient(270deg,#4facfe,#00f2fe,#667eea,#764ba2);
+background-size:800% 800%;
+animation:gradientBG 15s ease infinite;
+color:#222;
+}
+
+@keyframes gradientBG{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+padding:20px;
+color:white;
+}
+
+.search{
+margin-top:10px;
+padding:10px;
+width:260px;
+border:none;
+border-radius:20px;
+}
+
+/* LAYOUT */
+
+.container{
 display:flex;
-height:100vh;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-width:240px;
-background:#1a73e8;
-color:white;
+width:220px;
 padding:20px;
-overflow:auto;
-}
-
-.sidebar h2{
-margin-top:0;
+backdrop-filter:blur(12px);
+background:rgba(255,255,255,0.15);
+color:white;
 }
 
 .sidebar button{
-display:block;
 width:100%;
-margin:6px 0;
-padding:10px;
+padding:12px;
+margin:8px 0;
 border:none;
-background:rgba(255,255,255,0.1);
-color:white;
+border-radius:8px;
 cursor:pointer;
-border-radius:4px;
+background:rgba(255,255,255,0.2);
+color:white;
+transition:0.3s;
 }
 
 .sidebar button:hover{
-background:rgba(255,255,255,0.25);
+background:rgba(255,255,255,0.4);
+transform:scale(1.05);
 }
 
-/* MAIN AREA */
+/* MAIN */
 
 .main{
 flex:1;
 padding:30px;
-overflow:auto;
 }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:20px;
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
-.search{
-padding:10px;
-width:260px;
-border:1px solid #ddd;
-border-radius:6px;
+/* TOOL CARDS */
+
+.card{
+background:rgba(255,255,255,0.9);
+padding:25px;
+border-radius:15px;
+text-align:center;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
+
+.card:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 20px 40px rgba(0,0,0,0.25);
+}
+
+/* TOOLBOX */
 
 .toolbox{
-background:white;
+margin-top:30px;
+background:rgba(255,255,255,0.95);
 padding:25px;
-border-radius:8px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-button.action{
-background:#1a73e8;
-color:white;
-padding:10px 18px;
-border:none;
-border-radius:5px;
-cursor:pointer;
-margin-top:10px;
-}
+/* INPUTS */
 
-textarea,input{
+input,textarea{
 width:100%;
 padding:10px;
-margin:6px 0;
-border:1px solid #ddd;
-border-radius:5px;
+margin:8px 0;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+/* BUTTON */
+
+button.action{
+background:linear-gradient(45deg,#667eea,#764ba2);
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button.action:hover{
+transform:scale(1.1);
+box-shadow:0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* ADS */
+
+.ad{
+background:rgba(255,255,255,0.7);
+border:2px dashed #bbb;
+padding:20px;
+margin:20px 0;
+text-align:center;
+border-radius:10px;
+}
+
+/* FLOATING PARTICLES */
+
+.particle{
+position:absolute;
+background:white;
+border-radius:50%;
+opacity:0.5;
+animation:float 15s infinite linear;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
 </style>
@@ -99,44 +175,38 @@ border-radius:5px;
 
 <body>
 
-<!-- SIDEBAR -->
-
-<div class="sidebar">
-
-<h2>Tools</h2>
-
-<button onclick="openTool('word')">Word Counter</button>
-<button onclick="openTool('case')">Case Converter</button>
-<button onclick="openTool('password')">Password Generator</button>
-<button onclick="openTool('qr')">QR Generator</button>
-<button onclick="openTool('reverse')">Reverse Text</button>
-<button onclick="openTool('random')">Random Number</button>
-<button onclick="openTool('bmi')">BMI Calculator</button>
-<button onclick="openTool('age')">Age Calculator</button>
-<button onclick="openTool('tip')">Tip Calculator</button>
-<button onclick="openTool('uuid')">UUID Generator</button>
-<button onclick="openTool('temp')">Temperature Converter</button>
-<button onclick="openTool('lorem')">Lorem Generator</button>
-
-</div>
-
-<!-- MAIN -->
-
-<div class="main">
-
 <header>
 
-<h1>Free Online Tools</h1>
+<h1>Free Online Tools Hub</h1>
 
 <input class="search" placeholder="Search tools..." onkeyup="searchTool(this.value)">
 
 </header>
 
-<div class="toolbox" id="toolbox">
+<div class="container">
 
-<h2>Welcome</h2>
+<div class="sidebar">
 
-<p>Select a tool from the left menu.</p>
+<h3>Categories</h3>
+
+<button onclick="showCategory('pdf')">PDF Tools</button>
+<button onclick="showCategory('image')">Image Tools</button>
+<button onclick="showCategory('text')">Text Tools</button>
+<button onclick="showCategory('calc')">Calculators</button>
+
+</div>
+
+<div class="main">
+
+<div class="ad">AD SPACE</div>
+
+<div id="toolGrid" class="grid"></div>
+
+<div id="toolbox" class="toolbox">
+<h2>Select a tool above</h2>
+</div>
+
+<div class="ad">AD SPACE</div>
 
 </div>
 
@@ -144,17 +214,86 @@ border-radius:5px;
 
 <script>
 
-/* SEARCH TOOL */
+/* FLOATING PARTICLES */
+
+for(let i=0;i<25;i++){
+let p=document.createElement("div")
+p.className="particle"
+p.style.width=p.style.height=Math.random()*6+4+"px"
+p.style.left=Math.random()*100+"%"
+p.style.animationDuration=10+Math.random()*10+"s"
+document.body.appendChild(p)
+}
+
+/* TOOL DATABASE */
+
+const tools={
+
+pdf:[
+{title:"Image to PDF",id:"imgpdf"},
+{title:"Text to PDF",id:"textpdf"}
+],
+
+image:[
+{title:"Image Compressor",id:"compress"},
+{title:"Image Resizer",id:"resize"}
+],
+
+text:[
+{title:"Word Counter",id:"word"},
+{title:"Case Converter",id:"case"},
+{title:"Reverse Text",id:"reverse"}
+],
+
+calc:[
+{title:"BMI Calculator",id:"bmi"},
+{title:"Age Calculator",id:"age"},
+{title:"Password Generator",id:"password"}
+]
+
+}
+
+/* SHOW CATEGORY */
+
+function showCategory(cat){
+
+let grid=document.getElementById("toolGrid")
+
+grid.innerHTML=""
+
+tools[cat].forEach(t=>{
+
+grid.innerHTML+=`
+<div class="card" onclick="openTool('${t.id}')">
+<h3>${t.title}</h3>
+</div>
+`
+
+})
+
+}
+
+/* SEARCH */
 
 function searchTool(q){
 
 q=q.toLowerCase()
 
-let buttons=document.querySelectorAll(".sidebar button")
+let grid=document.getElementById("toolGrid")
 
-buttons.forEach(btn=>{
+grid.innerHTML=""
 
-btn.style.display=btn.innerText.toLowerCase().includes(q)?"block":"none"
+Object.values(tools).flat().forEach(t=>{
+
+if(t.title.toLowerCase().includes(q)){
+
+grid.innerHTML+=`
+<div class="card" onclick="openTool('${t.id}')">
+<h3>${t.title}</h3>
+</div>
+`
+
+}
 
 })
 
@@ -166,18 +305,33 @@ function openTool(tool){
 
 let html=""
 
+if(tool=="imgpdf"){
+
+html=`
+<h2>Image to PDF</h2>
+<input type="file" id="imgfile">
+<button class="action" onclick="imageToPDF()">Convert</button>
+`
+
+}
+
+if(tool=="textpdf"){
+
+html=`
+<h2>Text to PDF</h2>
+<textarea id="text"></textarea>
+<button class="action" onclick="textToPDF()">Create PDF</button>
+`
+
+}
+
 if(tool=="word"){
 
 html=`
-
 <h2>Word Counter</h2>
-
 <textarea id="text"></textarea>
-
 <button class="action" onclick="countWords()">Count</button>
-
 <p id="result"></p>
-
 `
 
 }
@@ -185,47 +339,10 @@ html=`
 if(tool=="case"){
 
 html=`
-
 <h2>Case Converter</h2>
-
 <textarea id="text"></textarea>
-
-<button class="action" onclick="toUpper()">UPPERCASE</button>
-
-<button class="action" onclick="toLower()">lowercase</button>
-
-`
-
-}
-
-if(tool=="password"){
-
-html=`
-
-<h2>Password Generator</h2>
-
-<button class="action" onclick="generatePassword()">Generate</button>
-
-<p id="result"></p>
-
-`
-
-}
-
-if(tool=="qr"){
-
-html=`
-
-<h2>QR Generator</h2>
-
-<input id="qrtext" placeholder="Enter text">
-
-<button class="action" onclick="generateQR()">Generate</button>
-
-<br><br>
-
-<img id="qrimg">
-
+<button class="action" onclick="toUpper()">UPPER</button>
+<button class="action" onclick="toLower()">lower</button>
 `
 
 }
@@ -233,29 +350,20 @@ html=`
 if(tool=="reverse"){
 
 html=`
-
 <h2>Reverse Text</h2>
-
 <input id="text">
-
 <button class="action" onclick="reverseText()">Reverse</button>
-
 <p id="result"></p>
-
 `
 
 }
 
-if(tool=="random"){
+if(tool=="password"){
 
 html=`
-
-<h2>Random Number</h2>
-
-<button class="action" onclick="randomNumber()">Generate</button>
-
+<h2>Password Generator</h2>
+<button class="action" onclick="generatePassword()">Generate</button>
 <p id="result"></p>
-
 `
 
 }
@@ -263,17 +371,11 @@ html=`
 if(tool=="bmi"){
 
 html=`
-
 <h2>BMI Calculator</h2>
-
 <input id="weight" placeholder="Weight kg">
-
 <input id="height" placeholder="Height cm">
-
 <button class="action" onclick="calcBMI()">Calculate</button>
-
 <p id="result"></p>
-
 `
 
 }
@@ -281,77 +383,10 @@ html=`
 if(tool=="age"){
 
 html=`
-
 <h2>Age Calculator</h2>
-
 <input type="date" id="birth">
-
 <button class="action" onclick="calcAge()">Calculate</button>
-
 <p id="result"></p>
-
-`
-
-}
-
-if(tool=="tip"){
-
-html=`
-
-<h2>Tip Calculator</h2>
-
-<input id="bill" placeholder="Bill amount">
-
-<input id="tip" placeholder="Tip %">
-
-<button class="action" onclick="calcTip()">Calculate</button>
-
-<p id="result"></p>
-
-`
-
-}
-
-if(tool=="uuid"){
-
-html=`
-
-<h2>UUID Generator</h2>
-
-<button class="action" onclick="genUUID()">Generate</button>
-
-<p id="result"></p>
-
-`
-
-}
-
-if(tool=="temp"){
-
-html=`
-
-<h2>Temperature Converter</h2>
-
-<input id="celsius" placeholder="Celsius">
-
-<button class="action" onclick="convertTemp()">Convert</button>
-
-<p id="result"></p>
-
-`
-
-}
-
-if(tool=="lorem"){
-
-html=`
-
-<h2>Lorem Ipsum Generator</h2>
-
-<button class="action" onclick="genLorem()">Generate</button>
-
-<p id="result"></p>
-
 `
 
 }
@@ -363,110 +398,72 @@ document.getElementById("toolbox").innerHTML=html
 /* FUNCTIONS */
 
 function countWords(){
-
 let t=document.getElementById("text").value
-
-document.getElementById("result").innerText="Words: "+t.trim().split(/\s+/).length
-
+document.getElementById("result").innerText=t.split(/\s+/).length+" words"
 }
 
 function toUpper(){
-
 let t=document.getElementById("text")
-
 t.value=t.value.toUpperCase()
-
 }
 
 function toLower(){
-
 let t=document.getElementById("text")
-
 t.value=t.value.toLowerCase()
-
-}
-
-function generatePassword(){
-
-let c="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-
-let p=""
-
-for(let i=0;i<12;i++) p+=c[Math.floor(Math.random()*c.length)]
-
-document.getElementById("result").innerText=p
-
-}
-
-function randomNumber(){
-
-document.getElementById("result").innerText=Math.floor(Math.random()*1000)
-
 }
 
 function reverseText(){
-
 let t=document.getElementById("text").value
-
 document.getElementById("result").innerText=t.split("").reverse().join("")
-
 }
 
-function generateQR(){
-
-let t=document.getElementById("qrtext").value
-
-document.getElementById("qrimg").src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+t
-
+function generatePassword(){
+let c="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+let p=""
+for(let i=0;i<12;i++) p+=c[Math.floor(Math.random()*c.length)]
+document.getElementById("result").innerText=p
 }
 
 function calcBMI(){
-
 let w=document.getElementById("weight").value
-
 let h=document.getElementById("height").value/100
-
 document.getElementById("result").innerText="BMI: "+(w/(h*h)).toFixed(2)
-
 }
 
 function calcAge(){
-
 let b=new Date(document.getElementById("birth").value)
-
 let age=new Date().getFullYear()-b.getFullYear()
-
 document.getElementById("result").innerText=age+" years"
+}
+
+function imageToPDF(){
+
+let file=document.getElementById("imgfile").files[0]
+let reader=new FileReader()
+
+reader.onload=function(){
+
+let link=document.createElement("a")
+link.href=reader.result
+link.download="image.pdf"
+link.click()
 
 }
 
-function calcTip(){
-
-let bill=parseFloat(document.getElementById("bill").value)
-
-let tip=parseFloat(document.getElementById("tip").value)
-
-document.getElementById("result").innerText="Tip: "+(bill*tip/100)
+reader.readAsDataURL(file)
 
 }
 
-function genUUID(){
+function textToPDF(){
 
-document.getElementById("result").innerText=crypto.randomUUID()
+let text=document.getElementById("text").value
 
-}
+let blob=new Blob([text],{type:"application/pdf"})
 
-function convertTemp(){
-
-let c=document.getElementById("celsius").value
-
-document.getElementById("result").innerText=(c*9/5+32)+" °F"
-
-}
-
-function genLorem(){
-
-document.getElementById("result").innerText="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+let link=document.createElement("a")
+link.href=URL.createObjectURL(blob)
+link.download="text.pdf"
+link.click()
 
 }
 
