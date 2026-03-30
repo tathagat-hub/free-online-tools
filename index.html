@@ -4,188 +4,48 @@
 
 <title>Free Online Tools</title>
 
+<link rel="stylesheet" href="style.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-
-body{
-font-family:Arial;
-background:#f5f5f5;
-text-align:center;
-padding:30px;
-}
-
-h1{
-color:#333;
-}
-
-.container{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-margin:20px auto;
-max-width:600px;
-}
-
-button{
-padding:10px 20px;
-border:none;
-background:#4CAF50;
-color:white;
-border-radius:5px;
-cursor:pointer;
-}
-
-button:hover{
-background:#45a049;
-}
-
-canvas{
-max-width:100%;
-margin-top:15px;
-}
-
-textarea{
-width:90%;
-height:120px;
-}
-
-</style>
 
 </head>
 
 <body>
 
+<header>
+
 <h1>Free Online Tools</h1>
 
-<!-- Image Compressor -->
+<p>Simple tools for everyday tasks</p>
 
-<div class="container">
+</header>
 
-<h2>Image Compressor</h2>
+<div class="search">
 
-<input type="file" id="upload" accept="image/*">
-
-<br><br>
-
-<canvas id="canvas"></canvas>
-
-<br><br>
-
-<button onclick="download()">Download Compressed Image</button>
+<input type="text" id="search" placeholder="Search tools..." onkeyup="searchTools()">
 
 </div>
 
-<!-- Word Counter -->
+<div class="grid" id="tools">
 
-<div class="container">
-
-<h2>Word Counter</h2>
-
-<textarea id="text"></textarea>
-
-<br><br>
-
-<button onclick="countWords()">Count Words</button>
-
-<p id="wordresult"></p>
-
-</div>
-
-<!-- Text Case Converter -->
-
-<div class="container">
-
-<h2>Text Case Converter</h2>
-
-<textarea id="caseText"></textarea>
-
-<br><br>
-
-<button onclick="toUpper()">UPPERCASE</button>
-
-<button onclick="toLower()">lowercase</button>
+<div class="card" onclick="openTool('word')">Word Counter</div>
+<div class="card" onclick="openTool('case')">Case Converter</div>
+<div class="card" onclick="openTool('password')">Password Generator</div>
+<div class="card" onclick="openTool('qr')">QR Generator</div>
+<div class="card" onclick="openTool('bmi')">BMI Calculator</div>
+<div class="card" onclick="openTool('age')">Age Calculator</div>
+<div class="card" onclick="openTool('tip')">Tip Calculator</div>
+<div class="card" onclick="openTool('random')">Random Number</div>
+<div class="card" onclick="openTool('reverse')">Reverse Text</div>
+<div class="card" onclick="openTool('uuid')">UUID Generator</div>
+<div class="card" onclick="openTool('temp')">Temperature Converter</div>
+<div class="card" onclick="openTool('lorem')">Lorem Generator</div>
 
 </div>
 
-<script>
+<div id="toolarea"></div>
 
-// Image Compressor
-
-let canvas=document.getElementById("canvas")
-let ctx=canvas.getContext("2d")
-
-document.getElementById("upload").addEventListener("change",function(e){
-
-let file=e.target.files[0]
-
-let reader=new FileReader()
-
-reader.onload=function(event){
-
-let img=new Image()
-
-img.onload=function(){
-
-canvas.width=img.width*0.6
-canvas.height=img.height*0.6
-
-ctx.drawImage(img,0,0,canvas.width,canvas.height)
-
-}
-
-img.src=event.target.result
-
-}
-
-reader.readAsDataURL(file)
-
-})
-
-function download(){
-
-let link=document.createElement("a")
-
-link.download="compressed-image.jpg"
-
-link.href=canvas.toDataURL("image/jpeg",0.6)
-
-link.click()
-
-}
-
-// Word Counter
-
-function countWords(){
-
-let text=document.getElementById("text").value
-
-let words=text.trim().split(/\s+/).length
-
-document.getElementById("wordresult").innerText="Words: "+words
-
-}
-
-// Case Converter
-
-function toUpper(){
-
-let text=document.getElementById("caseText")
-
-text.value=text.value.toUpperCase()
-
-}
-
-function toLower(){
-
-let text=document.getElementById("caseText")
-
-text.value=text.value.toLowerCase()
-
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
